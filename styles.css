@@ -133,7 +133,7 @@ section:hover {
     transform: translateY(-5px);
 }
 
-section h2 {
+section h2, #campos-magneticos h2, #campos-electricos h2, #electricidad h2 {
     margin-top: 0;
     color: #343a40;
     font-size: 2rem; /* Título más pequeño */
@@ -143,7 +143,7 @@ section h2 {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-section h3 {
+section h3, #campos-magneticos h3, #campos-electricos h3, #electricidad h3 {
     margin: 1rem 0;
     color: #6c757d;
     font-size: 1.3rem; /* Título más pequeño */
@@ -220,49 +220,39 @@ footer {
     margin-left: 60px;
 }
 
-#campos-magneticos h2, #campos-electricos h2, #electricidad h2,
-#campos-magneticos h3, #campos-electricos h3, #electricidad h3 {
-    color: #343a40;
-    font-size: 2rem; /* Título más pequeño */
-    font-weight: 300; /* Título más delgado */
-    border-bottom: 4px solid #007bff;
-    padding-bottom: 0.75rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+/* Contenedor de la galería de imágenes */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
-#campos-magneticos label, #campos-electricos label, #electricidad label {
-    display: block;
-    margin-bottom: 0.75rem;
-    font-weight: bold;
-    color: #495057;
-}
-
-#campos-magneticos input, #campos-electricos input, #electricidad input {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 12px;
-    box-sizing: border-box;
-    font-size: 1.2rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    background-color: #f8f9fa;
-}
-
-#campos-magneticos button, #campos-electricos button, #electricidad button {
-    padding: 0.75rem 1.5rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+.image-item {
+    position: relative;
+    width: 150px; /* Ajusta el tamaño de las imágenes */
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-#campos-magneticos button:hover, #campos-electricos button:hover, #electricidad button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+.image-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.image-item:hover {
+    transform: scale(1.1);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
+
+/* Adaptaciones para dispositivos móviles */
+@media (max-width: 600px) {
+    .image-item {
+        width: 100px; /* Ajusta el tamaño de las imágenes en dispositivos móviles */
+    }
+}
+
