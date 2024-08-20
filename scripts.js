@@ -267,6 +267,19 @@ function ejecutarCalculos() {
     convertirEnergia();
     convertirVoltaje();
 }
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    const menu = document.getElementById('side-menu');
+    menu.classList.toggle('show');
+});
 
+// Cerrar el menú si se hace clic fuera de él
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('side-menu');
+    const button = document.getElementById('menu-toggle');
+
+    if (!menu.contains(event.target) && !button.contains(event.target) && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+    }
+});
 // Asignar función de ejecución al botón de envío
 document.getElementById('enviar').addEventListener('click', ejecutarCalculos);
