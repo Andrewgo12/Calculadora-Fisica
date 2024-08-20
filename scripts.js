@@ -272,14 +272,17 @@ document.getElementById('menu-toggle').addEventListener('click', function() {
     menu.classList.toggle('show');
 });
 
-// Cerrar el menú si se hace clic fuera de él
-document.addEventListener('click', function(event) {
-    const menu = document.getElementById('side-menu');
-    const button = document.getElementById('menu-toggle');
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const sideMenu = document.getElementById('side-menu');
 
-    if (!menu.contains(event.target) && !button.contains(event.target) && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-    }
+    menuToggle.addEventListener('click', function() {
+        sideMenu.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!sideMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+            sideMenu.classList.remove('active');
+        }
+    });
 });
-// Asignar función de ejecución al botón de envío
-document.getElementById('enviar').addEventListener('click', ejecutarCalculos);
