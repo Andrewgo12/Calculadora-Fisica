@@ -23,32 +23,6 @@ function calcularVelocidadAngular() {
     }
 }
 
-// Calculadora de Movimiento Rectilíneo Uniforme (MRU)
-function calcularMRU() {
-    const velocidad = parseFloat(document.getElementById('mru_velocidad').value);
-    const tiempo = parseFloat(document.getElementById('mru_tiempo').value);
-
-    if (!isNaN(velocidad) && !isNaN(tiempo)) {
-        const distancia = velocidad * tiempo;
-        document.getElementById('resultadoMRU').innerText = `Distancia recorrida: ${distancia} metros`;
-    } else {
-        document.getElementById('resultadoMRU').innerText = 'Por favor, ingresa valores válidos.';
-    }
-}
-
-// Calculadora de Movimiento Rectilíneo Uniformemente Acelerado (MRUA)
-function calcularMRUA() {
-    const aceleracion = parseFloat(document.getElementById('mrua_aceleracion').value);
-    const tiempo = parseFloat(document.getElementById('mrua_tiempo').value);
-
-    if (!isNaN(aceleracion) && !isNaN(tiempo)) {
-        const velocidadFinal = aceleracion * tiempo;
-        document.getElementById('resultadoMRUA').innerText = `Velocidad final: ${velocidadFinal} m/s`;
-    } else {
-        document.getElementById('resultadoMRUA').innerText = 'Por favor, ingresa valores válidos.';
-    }
-}
-
 // Conversión de Rad/s a RPM
 function convertirRadSRpm() {
     const rad_s = parseFloat(document.getElementById('rad_s').value);
@@ -58,6 +32,42 @@ function convertirRadSRpm() {
         document.getElementById('resultadoConversionRadSRpm').innerText = `RPM: ${rpm.toFixed(2)} rpm`;
     } else {
         document.getElementById('resultadoConversionRadSRpm').innerText = 'Por favor, ingresa un valor válido.';
+    }
+}
+
+// Conversión de RPM a Rad/s
+function convertirRpmARadS() {
+    const rpm = parseFloat(document.getElementById('rpm').value);
+
+    if (!isNaN(rpm)) {
+        const rad_s = rpm * (2 * Math.PI / 60);
+        document.getElementById('resultadoConversionRpmARadS').innerText = `Rad/s: ${rad_s.toFixed(2)} rad/s`;
+    } else {
+        document.getElementById('resultadoConversionRpmARadS').innerText = 'Por favor, ingresa un valor válido.';
+    }
+}
+
+// Conversión de Velocidad Angular a Frecuencia
+function convertirVelocidadAngularAFrecuencia() {
+    const velocidadAngular = parseFloat(document.getElementById('velocidadAngular').value);
+
+    if (!isNaN(velocidadAngular)) {
+        const frecuencia = velocidadAngular / (2 * Math.PI);
+        document.getElementById('resultadoConversionVelocidadAngularAFrecuencia').innerText = `Frecuencia: ${frecuencia.toFixed(2)} Hz`;
+    } else {
+        document.getElementById('resultadoConversionVelocidadAngularAFrecuencia').innerText = 'Por favor, ingresa un valor válido.';
+    }
+}
+
+// Conversión de Frecuencia a Velocidad Angular
+function convertirFrecuenciaAVelocidadAngular() {
+    const frecuencia = parseFloat(document.getElementById('frecuenciaAngular').value);
+
+    if (!isNaN(frecuencia)) {
+        const velocidadAngular = 2 * Math.PI * frecuencia;
+        document.getElementById('resultadoConversionFrecuenciaAVelocidadAngular').innerText = `Velocidad Angular: ${velocidadAngular.toFixed(2)} rad/s`;
+    } else {
+        document.getElementById('resultadoConversionFrecuenciaAVelocidadAngular').innerText = 'Por favor, ingresa un valor válido.';
     }
 }
 
@@ -73,10 +83,6 @@ function calcularDensidad() {
         document.getElementById('resultadoDensidad').innerText = 'Por favor, ingresa valores válidos.';
     }
 }
-
-// Constantes
-const k = 8.99e9; // N·m²/C²
-const u0 = 4 * Math.PI * 1e-7; // T·m/A
 
 // Calculadora de Fuerza Magnética sobre una Carga en Movimiento
 function calcularFuerzaMagnetica() {
@@ -159,107 +165,108 @@ function calcularCapacitancia() {
     }
 }
 
-// Calculadora de Corriente en un Circuito
-function calcularCorriente() {
-    const voltaje = parseFloat(document.getElementById('voltajeCorriente').value);
+// Conversión de Capacitancia
+function convertirCapacitancia() {
+    const capacitancia = parseFloat(document.getElementById('capacitancia').value);
+
+    if (!isNaN(capacitancia)) {
+        const capacitancia_uF = capacitancia * 1e6;
+        const capacitancia_nF = capacitancia * 1e9;
+        const capacitancia_pF = capacitancia * 1e12;
+
+        document.getElementById('resultadoCapacitanciaConversion').innerText = `Capacitancia: ${capacitancia.toFixed(2)} F\n` +
+            `${capacitancia_uF.toFixed(2)} μF\n` +
+            `${capacitancia_nF.toFixed(2)} nF\n` +
+            `${capacitancia_pF.toFixed(2)} pF`;
+    } else {
+        document.getElementById('resultadoCapacitanciaConversion').innerText = 'Por favor, ingresa un valor válido.';
+    }
+}
+
+// Conversión de Resistencia
+function convertirResistencia() {
     const resistencia = parseFloat(document.getElementById('resistencia').value);
 
-    if (!isNaN(voltaje) && !isNaN(resistencia) && resistencia > 0) {
-        const corriente = voltaje / resistencia;
-        document.getElementById('resultadoCorriente').innerText = `Corriente: ${corriente.toFixed(2)} A`;
+    if (!isNaN(resistencia)) {
+        const resistencia_kOhm = resistencia / 1e3;
+        const resistencia_MOhm = resistencia / 1e6;
+
+        document.getElementById('resultadoResistenciaConversion').innerText = `Resistencia: ${resistencia.toFixed(2)} Ω\n` +
+            `${resistencia_kOhm.toFixed(2)} kΩ\n` +
+            `${resistencia_MOhm.toFixed(2)} MΩ`;
     } else {
-        document.getElementById('resultadoCorriente').innerText = 'Por favor, ingresa valores válidos.';
+        document.getElementById('resultadoResistenciaConversion').innerText = 'Por favor, ingresa un valor válido.';
     }
 }
 
-// Calculadora de Potencia en un Circuito
-function calcularPotencia() {
-    const voltaje = parseFloat(document.getElementById('voltajePotencia').value);
-    const corriente = parseFloat(document.getElementById('corrientePotencia').value);
+// Calculadora de Energía Almacenada en un Condensador
+function calcularEnergiaCondensador() {
+    const capacitancia = parseFloat(document.getElementById('capacitanciaEnergia').value);
+    const voltaje = parseFloat(document.getElementById('voltajeEnergia').value);
 
-    if (!isNaN(voltaje) && !isNaN(corriente)) {
-        const potencia = voltaje * corriente;
-        document.getElementById('resultadoPotencia').innerText = `Potencia: ${potencia.toFixed(2)} W`;
+    if (!isNaN(capacitancia) && !isNaN(voltaje) && voltaje > 0) {
+        const energia = 0.5 * capacitancia * Math.pow(voltaje, 2);
+        document.getElementById('resultadoEnergiaCondensador').innerText = `Energía Almacenada: ${energia.toFixed(2)} J`;
     } else {
-        document.getElementById('resultadoPotencia').innerText = 'Por favor, ingresa valores válidos.';
+        document.getElementById('resultadoEnergiaCondensador').innerText = 'Por favor, ingresa valores válidos.';
     }
 }
-// Ley de Biot-Savart
-function calculateBiotSavart() {
-    const current = parseFloat(document.getElementById('current').value);
-    const length = parseFloat(document.getElementById('length').value);
-    const distance = parseFloat(document.getElementById('distance').value);
 
-    if (isNaN(current) || isNaN(length) || isNaN(distance)) {
-        alert('Por favor, ingrese valores válidos.');
-        return;
+// Conversión de Energía Almacenada
+function convertirEnergia() {
+    const energia = parseFloat(document.getElementById('energia').value);
+
+    if (!isNaN(energia)) {
+        const energia_mJ = energia * 1e3;
+        const energia_kJ = energia / 1e3;
+        const energia_MJ = energia / 1e6;
+
+        document.getElementById('resultadoEnergiaConversion').innerText = `Energía: ${energia.toFixed(2)} J\n` +
+            `${energia_mJ.toFixed(2)} mJ\n` +
+            `${energia_kJ.toFixed(2)} kJ\n` +
+            `${energia_MJ.toFixed(2)} MJ`;
+    } else {
+        document.getElementById('resultadoEnergiaConversion').innerText = 'Por favor, ingresa un valor válido.';
     }
-
-    const magneticField = (current * length) / (4 * Math.PI * Math.pow(distance, 2));
-    document.getElementById('biot-savart-result').innerText = `Campo Magnético: ${magneticField.toFixed(4)} T`;
 }
 
-// Fuerza Magnética
-function calculateMagneticForce() {
-    const charge = parseFloat(document.getElementById('charge').value);
-    const velocity = parseFloat(document.getElementById('velocity').value);
-    const magneticField = parseFloat(document.getElementById('magnetic-field').value);
+// Conversión de Voltaje
+function convertirVoltaje() {
+    const voltaje = parseFloat(document.getElementById('voltaje').value);
 
-    if (isNaN(charge) || isNaN(velocity) || isNaN(magneticField)) {
-        alert('Por favor, ingrese valores válidos.');
-        return;
+    if (!isNaN(voltaje)) {
+        const voltaje_mV = voltaje * 1e3;
+        const voltaje_kV = voltaje / 1e3;
+
+        document.getElementById('resultadoVoltajeConversion').innerText = `Voltaje: ${voltaje.toFixed(2)} V\n` +
+            `${voltaje_mV.toFixed(2)} mV\n` +
+            `${voltaje_kV.toFixed(2)} kV`;
+    } else {
+        document.getElementById('resultadoVoltajeConversion').innerText = 'Por favor, ingresa un valor válido.';
     }
-
-    const force = charge * velocity * magneticField;
-    document.getElementById('fuerza-magnetica-result').innerText = `Fuerza Magnética: ${force.toFixed(4)} N`;
 }
 
-// Ley de Ampère
-function calculateAmpereLaw() {
-    const current = parseFloat(document.getElementById('current-ampere').value);
-    const perimeter = parseFloat(document.getElementById('perimeter').value);
-
-    if (isNaN(current) || isNaN(perimeter)) {
-        alert('Por favor, ingrese valores válidos.');
-        return;
-    }
-
-    const magneticField = (current) / (perimeter);
-    document.getElementById('ley-ampere-result').innerText = `Campo Magnético: ${magneticField.toFixed(4)} T`;
+// Función para llamar las calculadoras
+function ejecutarCalculos() {
+    calcularDistancia();
+    calcularVelocidadAngular();
+    convertirRadSRpm();
+    convertirRpmARadS();
+    convertirVelocidadAngularAFrecuencia();
+    convertirFrecuenciaAVelocidadAngular();
+    calcularDensidad();
+    calcularFuerzaMagnetica();
+    calcularFuerzaEntreCorrientes();
+    calcularFuerzaElectrica();
+    calcularCampoElectrico();
+    calcularPotencialElectrico();
+    calcularCapacitancia();
+    convertirCapacitancia();
+    convertirResistencia();
+    calcularEnergiaCondensador();
+    convertirEnergia();
+    convertirVoltaje();
 }
 
-// Ley de Gauss en el Magnetismo
-function calculateGaussLaw() {
-    const magneticFlux = parseFloat(document.getElementById('magnetic-flux').value);
-    const area = parseFloat(document.getElementById('area').value);
-
-    if (isNaN(magneticFlux) || isNaN(area)) {
-        alert('Por favor, ingrese valores válidos.');
-        return;
-    }
-
-    const magneticField = magneticFlux / area;
-    document.getElementById('ley-gauss-magnetismo-result').innerText = `Campo Magnético: ${magneticField.toFixed(4)} T`;
-}
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById('menu-toggle');
-    const sideMenu = document.getElementById('side-menu');
-    const body = document.body;
-
-    menuToggle.addEventListener('click', () => {
-        if (sideMenu.style.left === '0px') {
-            sideMenu.style.left = '-250px';
-            body.style.marginLeft = '0';
-        } else {
-            sideMenu.style.left = '0px';
-            body.style.marginLeft = '250px';
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!sideMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-            sideMenu.style.left = '-250px';
-            body.style.marginLeft = '0';
-        }
-    });
-});
+// Asignar función de ejecución al botón de envío
+document.getElementById('enviar').addEventListener('click', ejecutarCalculos);
