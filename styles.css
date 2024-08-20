@@ -1,0 +1,288 @@
+/* Fuente principal */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f8;
+    color: #333;
+}
+
+/* Estilos del encabezado */
+header {
+    background: linear-gradient(135deg, #007bff, #00d2d3);
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+    border-bottom: 4px solid #0056b3;
+    border-radius: 0 0 20px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+header button {
+    position: absolute;
+    left: 20px; /* Ajusta la distancia desde el borde izquierdo */
+    top: 1rem;
+    background: #ff5722;
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem; /* Aumentado para agrandar el botón */
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.2rem; /* Aumentado para agrandar el texto del botón */
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header button:hover {
+    background: #e64a19;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos del menú de navegación lateral */
+#side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Ajusta el valor según el ancho deseado */
+    width: 250px; /* Ajusta el ancho según tus necesidades */
+    height: 100%;
+    background-color: #212529;
+    color: #fff;
+    overflow-y: auto;
+    transition: left 0.4s ease, transform 0.3s ease;
+    z-index: 1000;
+    padding: 1.5rem;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
+    border-radius: 0 20px 20px 0;
+    transform: translateX(-20px);
+}
+
+#side-menu.active {
+    left: 0;
+    transform: translateX(0);
+}
+
+#side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#side-menu li {
+    padding: 1rem;
+    border-bottom: 1px solid #343a40;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    cursor: pointer;
+}
+
+#side-menu li:hover {
+    background-color: #343a40;
+    color: #fff;
+}
+
+#side-menu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+#side-menu li a:hover {
+    color: #00d2d3;
+}
+
+/* Ajuste del contenido principal cuando el menú está activo */
+main {
+    padding: 2rem;
+    transition: margin-left 0.4s ease;
+}
+
+#side-menu.active ~ main {
+    margin-left: 250px; /* Ajusta este valor al ancho del menú */
+}
+
+/* Estilos de las secciones */
+section {
+    margin: 2rem auto; /* Agregado para centrar y espaciar */
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    max-width: calc(100% - 60px); /* Ajuste para que no sobrepase los 60px desde el borde izquierdo */
+    margin-left: 60px; /* Espaciado desde el borde izquierdo */
+}
+
+section:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+section h2 {
+    margin-top: 0;
+    color: #343a40;
+    font-size: 2.5rem;
+    border-bottom: 4px solid #007bff;
+    padding-bottom: 0.75rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+section h3 {
+    margin: 1rem 0;
+    color: #6c757d;
+    font-size: 1.5rem;
+}
+
+/* Estilos de los formularios */
+form label {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #495057;
+}
+
+form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #f8f9fa;
+}
+
+form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+/* Estilos de los botones */
+button {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos del pie de página */
+footer {
+    background: linear-gradient(135deg, #007bff, #00d2d3);
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos específicos para secciones de campos magnéticos y eléctricos */
+#campos-magneticos, #campos-electricos, #electricidad {
+    margin: 20px auto; /* Ajustado para centrar y espaciar */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    max-width: calc(100% - 60px); /* Ajuste para que no sobrepase los 60px desde el borde izquierdo */
+    margin-left: 60px; /* Espaciado desde el borde izquierdo */
+}
+
+#campos-magneticos h2, #campos-electricos h2, #electricidad h2,
+#campos-magneticos h3, #campos-electricos h3, #electricidad h3 {
+    color: #343a40;
+    font-size: 2.5rem;
+    border-bottom: 4px solid #007bff;
+    padding-bottom: 0.75rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+#campos-magneticos label, #campos-electricos label, #electricidad label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: bold;
+    color: #495057;
+}
+
+#campos-magneticos input, #campos-electricos input, #electricidad input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #f8f9fa;
+}
+
+#campos-magneticos input:focus, #campos-electricos input:focus, #electricidad input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+#campos-magneticos button, #campos-electricos button, #electricidad button {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#campos-magneticos button:hover, #campos-electricos button:hover, #electricidad button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo del icono del menú */
+#menu-toggle {
+    font-size: 1.5rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    background-color: #ffffffa0;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#menu-toggle:hover {
+    background-color: #ffffff;
+    transform: rotate(90deg);
+}
