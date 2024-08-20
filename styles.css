@@ -50,27 +50,25 @@ header button:hover {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos del menú de navegación lateral */
+/* Menú Lateral */
 #side-menu {
     position: fixed;
     top: 0;
-    left: -250px;
+    left: -250px; /* Oculto inicialmente */
     width: 250px;
     height: 100%;
     background-color: #212529;
     color: #fff;
     overflow-y: auto;
-    transition: left 0.4s ease, transform 0.3s ease;
+    transition: left 0.4s ease;
     z-index: 1000;
     padding: 1.5rem;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
     border-radius: 0 20px 20px 0;
-    transform: translateX(-20px);
 }
 
 #side-menu.active {
-    left: 0;
-    transform: translateX(0);
+    left: 0; /* Visible cuando se activa */
 }
 
 #side-menu ul {
@@ -83,13 +81,11 @@ header button:hover {
     padding: 1rem;
     border-bottom: 1px solid #343a40;
     transition: background-color 0.3s, color 0.3s;
-    position: relative;
     cursor: pointer;
 }
 
 #side-menu li:hover {
     background-color: #343a40;
-    color: #fff;
 }
 
 #side-menu li a {
@@ -97,11 +93,6 @@ header button:hover {
     text-decoration: none;
     display: block;
     font-size: 1.2rem;
-    transition: color 0.3s;
-}
-
-#side-menu li a:hover {
-    color: #00d2d3;
 }
 
 /* Ajuste del contenido principal cuando el menú está activo */
@@ -251,8 +242,31 @@ footer {
 
 /* Adaptaciones para dispositivos móviles */
 @media (max-width: 600px) {
+    #side-menu {
+        width: 200px;
+    }
+    
+    #side-menu.active {
+        left: 0;
+        transform: translateX(0);
+    }
+
+    #side-menu ul {
+        padding: 0;
+    }
+
+    #side-menu li {
+        font-size: 1rem;
+    }
+
     .image-item {
         width: 100px; /* Ajusta el tamaño de las imágenes en dispositivos móviles */
     }
 }
 
+/* Adaptaciones para pantallas grandes */
+@media (min-width: 1024px) {
+    #side-menu {
+        width: 300px;
+    }
+}
