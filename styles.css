@@ -260,13 +260,6 @@ footer {
     }
 
     .image-item {
-        width: 100px; /* Ajusta el tamaño de las imágenes en dispositivos móviles */
-    }
-}
-
-/* Adaptaciones para pantallas grandes */
-@media (min-width: 1024px) {
-    #side-menu {
-        width: 300px;
+        width: 100px; /* Ajusta el tamaño de las imágenes en móviles */
     }
 }
