@@ -1,210 +1,161 @@
-// Definición de constantes
-const u0 = 4 * Math.PI * 1e-7; // Permeabilidad magnética en T·m/A
-const k = 8.9875517923e9; // Constante de Coulomb en N·m²/C²
+document.addEventListener('DOMContentLoaded', function () {
+    // Manejo del menú lateral
+    const menuButton = document.querySelector('header button');
+    const sideMenu = document.getElementById('side-menu');
 
-// Función auxiliar para obtener valor
-function obtenerValor(id) {
-    const valor = parseFloat(document.getElementById(id).value);
-    return isNaN(valor) ? null : valor;
-}
+    menuButton.addEventListener('click', function () {
+        sideMenu.classList.toggle('active');
+    });
 
-// Calculadora de Distancia
-function calcularDistancia() {
-    const velocidad = obtenerValor('velocidad');
-    const tiempo = obtenerValor('tiempo');
-    
-    if (velocidad !== null && tiempo !== null) {
-        const distancia = velocidad * tiempo;
-        document.getElementById('resultadoMovimientos').innerText = `Distancia recorrida: ${distancia} metros`;
-    } else {
-        document.getElementById('resultadoMovimientos').innerText = 'Por favor, ingresa valores válidos.';
+    // Función para obtener valor de input
+    function obtenerValor(id) {
+        const valor = parseFloat(document.getElementById(id).value);
+        return isNaN(valor) ? 0 : valor;
     }
-}
 
-// Calculadora de Velocidad Angular
-function calcularVelocidadAngular() {
-    const frecuencia = obtenerValor('frecuencia');
-    
-    if (frecuencia !== null) {
-        const velocidadAngular = 2 * Math.PI * frecuencia;
-        document.getElementById('resultadoVelocidadAngular').innerText = `Velocidad angular: ${velocidadAngular.toFixed(2)} rad/s`;
-    } else {
-        document.getElementById('resultadoVelocidadAngular').innerText = 'Por favor, ingresa un valor válido.';
+    // Calcular Campo Magnético
+    function calcularCampoMagnetico() {
+        const corriente = obtenerValor('corriente');
+        const distancia = obtenerValor('distancia');
+        if (distancia === 0) {
+            alert('La distancia no puede ser cero.');
+            return;
+        }
+        const campoMagnetico = (0.000001256637061 * corriente) / distancia;
+        document.getElementById('resultado-campo-magnetico').textContent = `Campo Magnético: ${campoMagnetico.toFixed(6)} T`;
     }
-}
 
-// Conversión de Rad/s a RPM
-function convertirRadSRpm() {
-    const rad_s = obtenerValor('rad_s');
-
-    if (rad_s !== null) {
-        const rpm = rad_s * (60 / (2 * Math.PI));
-        document.getElementById('resultadoConversionRadSRpm').innerText = `RPM: ${rpm.toFixed(2)} rpm`;
-    } else {
-        document.getElementById('resultadoConversionRadSRpm').innerText = 'Por favor, ingresa un valor válido.';
+    // Calcular Campo Eléctrico
+    function calcularCampoElectrico() {
+        const carga = obtenerValor('carga');
+        const distancia = obtenerValor('distancia-campo-electrico');
+        if (distancia === 0) {
+            alert('La distancia no puede ser cero.');
+            return;
+        }
+        const campoElectrico = (8.9875517923e9 * carga) / (distancia * distancia);
+        document.getElementById('resultado-campo-electrico').textContent = `Campo Eléctrico: ${campoElectrico.toFixed(2)} N/C`;
     }
-}
 
-// Conversión de RPM a Rad/s
-function convertirRpmARadS() {
-    const rpm = obtenerValor('rpm');
-
-    if (rpm !== null) {
-        const rad_s = rpm * (2 * Math.PI / 60);
-        document.getElementById('resultadoConversionRpmARadS').innerText = `Rad/s: ${rad_s.toFixed(2)} rad/s`;
-    } else {
-        document.getElementById('resultadoConversionRpmARadS').innerText = 'Por favor, ingresa un valor válido.';
+    // Calcular Resistencia
+    function calcularResistencia() {
+        const voltaje = obtenerValor('voltaje');
+        const corriente = obtenerValor('corriente-resistencia');
+        if (corriente === 0) {
+            alert('La corriente no puede ser cero.');
+            return;
+        }
+        const resistencia = voltaje / corriente;
+        document.getElementById('resultado-resistencia').textContent = `Resistencia: ${resistencia.toFixed(2)} Ω`;
     }
-}
 
-// Conversión de Velocidad Angular a Frecuencia
-function convertirVelocidadAngularAFrecuencia() {
-    const velocidadAngular = obtenerValor('velocidadAngular');
-
-    if (velocidadAngular !== null) {
-        const frecuencia = velocidadAngular / (2 * Math.PI);
-        document.getElementById('resultadoConversionVelocidadAngularAFrecuencia').innerText = `Frecuencia: ${frecuencia.toFixed(2)} Hz`;
-    } else {
-        document.getElementById('resultadoConversionVelocidadAngularAFrecuencia').innerText = 'Por favor, ingresa un valor válido.';
+    // Calcular Potencia
+    function calcularPotencia() {
+        const voltaje = obtenerValor('voltaje-potencia');
+        const corriente = obtenerValor('corriente-potencia');
+        const potencia = voltaje * corriente;
+        document.getElementById('resultado-potencia').textContent = `Potencia: ${potencia.toFixed(2)} W`;
     }
-}
 
-// Conversión de Frecuencia a Velocidad Angular
-function convertirFrecuenciaAVelocidadAngular() {
-    const frecuencia = obtenerValor('frecuenciaAngular');
-
-    if (frecuencia !== null) {
-        const velocidadAngular = 2 * Math.PI * frecuencia;
-        document.getElementById('resultadoConversionFrecuenciaAVelocidadAngular').innerText = `Velocidad Angular: ${velocidadAngular.toFixed(2)} rad/s`;
-    } else {
-        document.getElementById('resultadoConversionFrecuenciaAVelocidadAngular').innerText = 'Por favor, ingresa un valor válido.';
-    }
-}
-
-// Calculadora de Densidad
-function calcularDensidad() {
-    const masa = obtenerValor('masa');
-    const volumen = obtenerValor('volumen');
-
-    if (masa !== null && volumen !== null) {
-        const densidad = masa / volumen;
-        document.getElementById('resultadoDensidad').innerText = `Densidad: ${densidad.toFixed(2)} kg/m³`;
-    } else {
-        document.getElementById('resultadoDensidad').innerText = 'Por favor, ingresa valores válidos.';
-    }
-}
-
-// Calculadora de Fuerza Magnética sobre una Carga en Movimiento
-function calcularFuerzaMagnetica() {
-    const carga = obtenerValor('carga');
-    const velocidad = obtenerValor('velocidad');
-    const campoMagnetico = obtenerValor('campoMagnetico');
-
-    if (carga !== null && velocidad !== null && campoMagnetico !== null) {
-        const fuerza = carga * velocidad * campoMagnetico;
-        document.getElementById('resultadoFuerzaMagnetica').innerText = `Fuerza Magnética: ${fuerza.toFixed(2)} N`;
-    } else {
-        document.getElementById('resultadoFuerzaMagnetica').innerText = 'Por favor, ingresa valores válidos.';
-    }
-}
-
-// Calculadora de Fuerza entre dos Corrientes
-function calcularFuerzaEntreCorrientes() {
-    const corriente1 = obtenerValor('corriente1');
-    const corriente2 = obtenerValor('corriente2');
-    const distancia = obtenerValor('distanciaCorrientes');
-
-    if (corriente1 !== null && corriente2 !== null && distancia > 0) {
-        const fuerza = (u0 / (2 * Math.PI)) * ((corriente1 * corriente2) / distancia);
-        document.getElementById('resultadoFuerzaEntreCorrientes').innerText = `Fuerza entre Corrientes: ${fuerza.toFixed(2)} N/m`;
-    } else {
-        document.getElementById('resultadoFuerzaEntreCorrientes').innerText = 'Por favor, ingresa valores válidos.';
-    }
-}
-
-// Calculadora de Fuerza Eléctrica entre dos Cargas
-function calcularFuerzaElectrica() {
-    const carga1 = obtenerValor('carga1');
-    const carga2 = obtenerValor('carga2');
-    const distancia = obtenerValor('distanciaCargas');
-
-    if (carga1 !== null && carga2 !== null && distancia > 0) {
-        const fuerza = (k * carga1 * carga2) / (distancia * distancia);
-        document.getElementById('resultadoFuerzaElectrica').innerText = `Fuerza Eléctrica: ${fuerza.toFixed(2)} N`;
-    } else {
-        document.getElementById('resultadoFuerzaElectrica').innerText = 'Por favor, ingresa valores válidos.';
-    }
-}
-
-// Calculadora de Campo Eléctrico de una Carga
-function calcularCampoElectrico() {
-    const carga = obtenerValor('cargaCampo');
-    const distancia = obtenerValor('distanciaCampo');
-
-    if (carga !== null && distancia > 0) {
-        const campoElectrico = (k * carga) / (distancia * distancia);
-        document.getElementById('resultadoCampoElectrico').innerText = `Campo Eléctrico: ${campoElectrico.toFixed(2)} N/C`;
-    } else {
-        document.getElementById('resultadoCampoElectrico').innerText = 'Por favor, ingresa valores válidos.';
-    }
-}
-
-// Calculadora de Potencial Eléctrico de una Carga
-function calcularPotencialElectrico() {
-    const carga = obtenerValor('cargaPotencial');
-    const distancia = obtenerValor('distanciaPotencial');
-
-    if (carga !== null && distancia > 0) {
-        const potencial = (k * carga) / distancia;
-        document.getElementById('resultadoPotencialElectrico').innerText = `Potencial Eléctrico: ${potencial.toFixed(2)} V`;
-    } else {
-        document.getElementById('resultadoPotencialElectrico').innerText = 'Por favor, ingresa valores válidos.';
-    }
-}
-
-// Calculadora de Capacitancia de un Condensador
-function calcularCapacitancia() {
-    const carga = obtenerValor('cargaCapacitor');
-    const voltaje = obtenerValor('voltajeCapacitor');
-
-    if (carga !== null && voltaje > 0) {
+    // Calcular Capacitancia
+    function calcularCapacitancia() {
+        const carga = obtenerValor('carga-capacitancia');
+        const voltaje = obtenerValor('voltaje-capacitancia');
+        if (voltaje === 0) {
+            alert('El voltaje no puede ser cero.');
+            return;
+        }
         const capacitancia = carga / voltaje;
-        document.getElementById('resultadoCapacitancia').innerText = `Capacitancia: ${capacitancia.toFixed(2)} F`;
-    } else {
-        document.getElementById('resultadoCapacitancia').innerText = 'Por favor, ingresa valores válidos.';
+        document.getElementById('resultado-capacitancia').textContent = `Capacitancia: ${capacitancia.toFixed(2)} F`;
     }
-}
 
-// Conversión de Capacitancia
-function convertirCapacitancia() {
-    const capacitancia = obtenerValor('capacitancia');
-
-    if (capacitancia !== null) {
-        const capacitancia_uF = capacitancia * 1e6;
-        const capacitancia_nF = capacitancia * 1e9;
-        const capacitancia_pF = capacitancia * 1e12;
-
-        document.getElementById('resultadoCapacitanciaConversion').innerText = `Capacitancia: ${capacitancia.toFixed(2)} F\n` +
-            `${capacitancia_uF.toFixed(2)} μF\n` +
-            `${capacitancia_nF.toFixed(2)} nF\n` +
-            `${capacitancia_pF.toFixed(2)} pF`;
-    } else {
-        document.getElementById('resultadoCapacitanciaConversion').innerText = 'Por favor, ingresa un valor válido.';
+    // Calcular Energía Almacenada en un Capacitor
+    function calcularEnergiaCapacitor() {
+        const capacitancia = obtenerValor('capacitancia-energia');
+        const voltaje = obtenerValor('voltaje-energia');
+        const energia = 0.5 * capacitancia * Math.pow(voltaje, 2);
+        document.getElementById('resultado-energia-capacitor').textContent = `Energía: ${energia.toFixed(2)} J`;
     }
-}
 
-// Añadir event listeners a los botones
-document.getElementById('btnCalcularDistancia').addEventListener('click', calcularDistancia);
-document.getElementById('btnCalcularVelocidadAngular').addEventListener('click', calcularVelocidadAngular);
-document.getElementById('btnConvertirRadSRpm').addEventListener('click', convertirRadSRpm);
-document.getElementById('btnConvertirRpmARadS').addEventListener('click', convertirRpmARadS);
-document.getElementById('btnConvertirVelocidadAngularAFrecuencia').addEventListener('click', convertirVelocidadAngularAFrecuencia);
-document.getElementById('btnConvertirFrecuenciaAVelocidadAngular').addEventListener('click', convertirFrecuenciaAVelocidadAngular);
-document.getElementById('btnCalcularDensidad').addEventListener('click', calcularDensidad);
-document.getElementById('btnCalcularFuerzaMagnetica').addEventListener('click', calcularFuerzaMagnetica);
-document.getElementById('btnCalcularFuerzaEntreCorrientes').addEventListener('click', calcularFuerzaEntreCorrientes);
-document.getElementById('btnCalcularFuerzaElectrica').addEventListener('click', calcularFuerzaElectrica);
-document.getElementById('btnCalcularCampoElectrico').addEventListener('click', calcularCampoElectrico);
-document.getElementById('btnCalcularPotencialElectrico').addEventListener('click', calcularPotencialElectrico);
-document.getElementById('btnCalcularCapacitancia').addEventListener('click', calcularCapacitancia);
-document.getElementById('btnConvertirCapacitancia').addEventListener('click', convertirCapacitancia);
+    // Calcular Diferencia de Potencial
+    function calcularDiferenciaPotencial() {
+        const trabajo = obtenerValor('trabajo');
+        const carga = obtenerValor('carga-diferencia');
+        if (carga === 0) {
+            alert('La carga no puede ser cero.');
+            return;
+        }
+        const diferenciaPotencial = trabajo / carga;
+        document.getElementById('resultado-diferencia-potencial').textContent = `Diferencia de Potencial: ${diferenciaPotencial.toFixed(2)} V`;
+    }
+
+    // Calcular Flujo Eléctrico
+    function calcularFlujoElectrico() {
+        const campoElectrico = obtenerValor('campo-electrico-flujo');
+        const area = obtenerValor('area-flujo');
+        const flujoElectrico = campoElectrico * area;
+        document.getElementById('resultado-flujo-electrico').textContent = `Flujo Eléctrico: ${flujoElectrico.toFixed(2)} Nm²/C`;
+    }
+
+    // Calcular Fuerza Magnética
+    function calcularFuerzaMagnetica() {
+        const carga = obtenerValor('carga-fuerza');
+        const velocidad = obtenerValor('velocidad');
+        const campoMagnetico = obtenerValor('campo-magnetico-fuerza');
+        const fuerzaMagnetica = carga * velocidad * campoMagnetico;
+        document.getElementById('resultado-fuerza-magnetica').textContent = `Fuerza Magnética: ${fuerzaMagnetica.toFixed(2)} N`;
+    }
+
+    // Calcular Fuerza Electromotriz
+    function calcularFuerzaElectromotriz() {
+        const corriente = obtenerValor('corriente-fem');
+        const resistencia = obtenerValor('resistencia-fem');
+        const fem = corriente * resistencia;
+        document.getElementById('resultado-fem').textContent = `Fuerza Electromotriz: ${fem.toFixed(2)} V`;
+    }
+
+    // Calcular Resistencia en Serie
+    function calcularResistenciaSerie() {
+        const resistencias = [
+            obtenerValor('resistencia1'),
+            obtenerValor('resistencia2'),
+            obtenerValor('resistencia3')
+        ];
+        const resistenciaTotal = resistencias.reduce((total, r) => total + r, 0);
+        document.getElementById('resultado-resistencia-serie').textContent = `Resistencia en Serie: ${resistenciaTotal.toFixed(2)} Ω`;
+    }
+
+    // Calcular Resistencia en Paralelo
+    function calcularResistenciaParalelo() {
+        const resistencias = [
+            obtenerValor('resistencia1-paralelo'),
+            obtenerValor('resistencia2-paralelo'),
+            obtenerValor('resistencia3-paralelo')
+        ];
+        const resistenciaTotal = 1 / resistencias.reduce((total, r) => total + 1 / r, 0);
+        document.getElementById('resultado-resistencia-paralelo').textContent = `Resistencia en Paralelo: ${resistenciaTotal.toFixed(2)} Ω`;
+    }
+
+    // Calcular Voltaje
+    function calcularVoltaje() {
+        const corriente = obtenerValor('corriente-voltaje');
+        const resistencia = obtenerValor('resistencia-voltaje');
+        const voltaje = corriente * resistencia;
+        document.getElementById('resultado-voltaje').textContent = `Voltaje: ${voltaje.toFixed(2)} V`;
+    }
+
+    // Asignar eventos a los botones de cálculo
+    document.getElementById('calcular-campo-magnetico').addEventListener('click', calcularCampoMagnetico);
+    document.getElementById('calcular-campo-electrico').addEventListener('click', calcularCampoElectrico);
+    document.getElementById('calcular-resistencia').addEventListener('click', calcularResistencia);
+    document.getElementById('calcular-potencia').addEventListener('click', calcularPotencia);
+    document.getElementById('calcular-capacitancia').addEventListener('click', calcularCapacitancia);
+    document.getElementById('calcular-energia-capacitor').addEventListener('click', calcularEnergiaCapacitor);
+    document.getElementById('calcular-diferencia-potencial').addEventListener('click', calcularDiferenciaPotencial);
+    document.getElementById('calcular-flujo-electrico').addEventListener('click', calcularFlujoElectrico);
+    document.getElementById('calcular-fuerza-magnetica').addEventListener('click', calcularFuerzaMagnetica);
+    document.getElementById('calcular-fem').addEventListener('click', calcularFuerzaElectromotriz);
+    document.getElementById('calcular-resistencia-serie').addEventListener('click', calcularResistenciaSerie);
+    document.getElementById('calcular-resistencia-paralelo').addEventListener('click', calcularResistenciaParalelo);
+    document.getElementById('calcular-voltaje').addEventListener('click', calcularVoltaje);
+});
